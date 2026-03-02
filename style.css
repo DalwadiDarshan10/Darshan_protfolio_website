@@ -500,6 +500,35 @@ section {
     }
 }
 
+/* ==========================================================================
+   Global Highlight Utility (Neon Cyan Glow)
+   ========================================================================== */
+.highlight {
+    color: #00f5ff;
+    font-weight: 600;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.highlight::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.highlight:hover::after {
+    transform: scaleX(1);
+}
+
+
 
 /* ==========================================================================
    About Section
@@ -611,81 +640,52 @@ section {
 
 .skills-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
 }
 
-@media (min-width: 768px) {
-    .skills-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+.skill-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s ease;
 }
 
-.category-title {
-    font-size: 1.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
-    display: inline-block;
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: #00f5ff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 255, 0.15);
 }
 
-.skill-item {
-    margin-bottom: 1.5rem;
+.skill-card h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #ffffff;
 }
 
-.skill-info {
+.skill-tags {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.skill-name {
+.skill-tags span {
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: white;
+    transition: 0.3s;
     font-weight: 500;
 }
 
-.skill-percentage {
-    color: var(--text-secondary);
+.skill-tags span:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 245, 255, 0.4);
 }
-
-.progress-bar {
-    width: 100%;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.progress {
-    height: 100%;
-    width: 0;
-    /* Animated via JS */
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    border-radius: 5px;
-    transition: width 1.5s cubic-bezier(0.1, 0.5, 0.2, 1);
-    position: relative;
-}
-
-/* Add glow effect to the end of the progress bar */
-.progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 10px;
-    background: #fff;
-    box-shadow: 0 0 10px #fff, 0 0 5px #8b5cf6;
-    border-radius: 50%;
-    opacity: 0.8;
-}
-
-.skill-item:hover .progress {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
-}
-
 
 /* ==========================================================================
    Projects Section
@@ -693,6 +693,26 @@ section {
 .projects {
     background-color: var(--bg-color);
     position: relative;
+}
+
+.featured-project {
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(0, 245, 255, 0.3) !important;
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+}
+
+.featured-project:hover {
+    box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2), 0 0 20px rgba(123, 44, 255, 0.2) !important;
+    border-color: #00f5ff !important;
+}
+
+.featured-project .project-title {
+    font-size: 2.2rem;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
 }
 
 .projects-grid {
@@ -723,39 +743,21 @@ section {
 
 /* Hover Lift Effect & Glowing Shadow */
 .project-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
     background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(59, 130, 246, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.15);
-}
-
-.project-image-container {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-}
-
-.project-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.project-card:hover .project-image {
-    transform: scale(1.05);
+    border-color: rgba(0, 245, 255, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 255, 0.15);
 }
 
 .project-content {
-    padding: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
 .project-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: var(--text-primary);
     margin-bottom: 0.8rem;
 }
@@ -765,53 +767,93 @@ section {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     flex-grow: 1;
+    line-height: 1.6;
+}
+
+/* Project Badge */
+.project-badge {
+    align-self: flex-start;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Technologies Tags */
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.6rem;
     margin-bottom: 1.5rem;
 }
 
-.tag {
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--accent-color);
-    padding: 0.3rem 0.8rem;
+.project-tags .tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #00f5ff;
+    padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    transition: 0.3s;
 }
 
-/* Project Links */
+.project-tags .tag:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: #00f5ff;
+    transform: scale(1.05);
+}
+
+/* Project Links / Gradient Buttons */
 .project-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-top: auto;
 }
 
-.project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+.project-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    color: white !important;
+    text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--text-secondary);
-    transition: color var(--transition-fast);
+    transition: 0.3s ease;
+    border: none;
 }
 
-.project-link:hover {
-    color: var(--accent-color);
+.project-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 245, 255, 0.4);
+    background: linear-gradient(90deg, #7b2cff, #00f5ff);
 }
 
-.project-link svg {
-    transition: transform var(--transition-fast);
+
+/* Verification Button */
+.verify-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.project-link:hover svg {
+.verify-btn:hover {
     transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
 }
 
 
@@ -830,7 +872,7 @@ section {
 
 @media (min-width: 768px) {
     .achievements-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 }
 
@@ -845,15 +887,48 @@ section {
     transition: all var(--transition-normal);
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .achievement-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-8px);
 }
 
-/* Hover glow effect */
+/* Gold Theme */
+.gold-achievement:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.gold-icon {
+    background: rgba(255, 215, 0, 0.1) !important;
+    color: #ffd700 !important;
+    border-color: rgba(255, 215, 0, 0.3) !important;
+}
+
+.gold-achievement:hover .gold-icon {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4) !important;
+}
+
+/* Silver Theme */
+.silver-achievement:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(192, 192, 192, 0.2);
+    border-color: rgba(192, 192, 192, 0.5);
+}
+
+.silver-icon {
+    background: rgba(192, 192, 192, 0.1) !important;
+    color: #e0e0e0 !important;
+    border-color: rgba(192, 192, 192, 0.3) !important;
+}
+
+.silver-achievement:hover .silver-icon {
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.4) !important;
+}
+
+/* Hover glow effect background logic */
 .achievement-card::before {
     content: '';
     position: absolute;
@@ -861,11 +936,18 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.2), transparent 70%);
     opacity: 0;
     transition: opacity var(--transition-normal);
     z-index: -1;
     border-radius: 20px;
+}
+
+.gold-achievement::before {
+    background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.15), transparent 70%);
+}
+
+.silver-achievement::before {
+    background: radial-gradient(circle at 50% 0%, rgba(192, 192, 192, 0.15), transparent 70%);
 }
 
 .achievement-card:hover::before {
@@ -873,42 +955,135 @@ section {
 }
 
 .achievement-icon {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
-    background: rgba(59, 130, 246, 0.1);
-    color: var(--accent-color);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1.5rem;
-    border: 1px solid rgba(59, 130, 246, 0.2);
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .achievement-card:hover .achievement-icon {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 .achievement-title {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.achievement-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
     margin-bottom: 1rem;
+}
+
+.achievement-highlight {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(90deg, #b5b5b5, #ffffff);
+    color: #121212;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 10px rgba(192, 192, 192, 0.3);
 }
 
 .achievement-description {
     font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-bottom: 0;
+    color: #bbb;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.achievement-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 25px;
+    color: white !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+    margin-top: auto;
+    border: none;
+}
+
+.gold-btn {
+    background: linear-gradient(90deg, #d4af37, #ffd700);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    color: #121212 !important;
+}
+
+.gold-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(90deg, #ffd700, #d4af37);
+}
+
+.silver-btn {
+    background: linear-gradient(90deg, #9e9e9e, #e0e0e0);
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.2);
+    color: #121212 !important;
+}
+
+.silver-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(192, 192, 192, 0.5);
+    background: linear-gradient(90deg, #e0e0e0, #9e9e9e);
 }
 
 /* ==========================================================================
-   Education Timeline Section
+   Education Layout Section
    ========================================================================== */
 .education {
     background-color: var(--bg-color);
-    position: relative;
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.education-card {
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s ease;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    border-color: #00f5ff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 255, 0.15);
+}
+
+.education-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.degree {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #00f5ff;
+    /* Keeping the neon cyan branding tied closely to importance */
+}
+
+.edu-details {
+    color: #aaa;
+    font-size: 14px;
 }
 
 .timeline {
@@ -1036,116 +1211,46 @@ section {
 }
 
 .github-card {
-    background: rgba(255, 255, 255, 0.02);
+    max-width: 600px;
+    margin: auto;
+    padding: 35px;
+    text-align: center;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s ease;
 }
 
 .github-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(59, 130, 246, 0.1);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: #00f5ff;
 }
 
-/* Background grid effect */
-.github-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.5;
-    z-index: 0;
-    pointer-events: none;
+.github-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
-.github-header,
-.github-stats,
+.github-card p {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
 .github-btn {
-    position: relative;
-    z-index: 1;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #00f5ff, #7b2cff);
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease;
 }
 
-.github-header {
-    margin-bottom: 2.5rem;
+.github-btn:hover {
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.7);
 }
-
-.github-avatar-container {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem;
-    background: #1f2937;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    transition: transform var(--transition-normal);
-}
-
-.github-card:hover .github-avatar-container {
-    transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.github-logo {
-    color: #fff;
-}
-
-.github-user-info h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.2rem;
-}
-
-.github-user-info p {
-    color: var(--accent-color);
-    font-weight: 500;
-    margin-bottom: 0;
-}
-
-.github-stats {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-bottom: 2.5rem;
-}
-
-.github-stat {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1.5rem;
-    border-radius: 16px;
-    min-width: 150px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.github-stat h4 {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
-}
-
-.github-stat p {
-    font-size: 0.9rem;
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
 
 /* ==========================================================================
    Experience Timeline Section

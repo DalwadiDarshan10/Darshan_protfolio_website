@@ -61,70 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (textArray.length) setTimeout(type, newTextDelay + 250);
 });
 
-// Skills Progress Bar Animation on Scroll
-const progressBars = document.querySelectorAll('.progress');
-
-const animateProgress = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const progressBar = entry.target;
-            const width = progressBar.getAttribute('data-width');
-            progressBar.style.width = width;
-            // observer.unobserve(progressBar); // Uncomment to animate only once
-        } else {
-            // Reset animation when out of view (optional based on preference)
-            entry.target.style.width = '0';
-        }
-    });
-};
-
-const progressObserver = new IntersectionObserver(animateProgress, {
-    root: null,
-    threshold: 0.1, // Trigger when 10% visible
-});
-
-progressBars.forEach(bar => {
-    progressObserver.observe(bar);
-});
-
-// GitHub Stats Counter Animation
-const counters = document.querySelectorAll('.counter');
-const speed = 200; // The lower the slower
-
-const animateCounters = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const counter = entry.target;
-
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / speed;
-
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 10);
-                } else {
-                    counter.innerText = target;
-                    // observer.unobserve(counter); // Uncomment if you only want it to run once
-                }
-            };
-
-            updateCount();
-        } else {
-            counter.innerText = '0'; // Reset when out of view
-        }
-    });
-};
-
-const counterObserver = new IntersectionObserver(animateCounters, {
-    root: null,
-    threshold: 0.5,
-});
-
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
 
 // Global Scroll Reveal Animations
 const revealElements = document.querySelectorAll('section');
@@ -153,4 +89,27 @@ const revealObserver = new IntersectionObserver(revealOnScroll, {
 
 document.querySelectorAll('.reveal').forEach(section => {
     revealObserver.observe(section);
+});
+
+// Initialize EmailJS
+(function () {
+    emailjs.init("D0vHQJmjWlLdBap1m");
+})();
+
+// Handle form submit
+document.getElementById("contact-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    emailjs.sendForm(
+        "service_8y75e6w",
+        "template_2624t3q",
+        this
+    ).then(function () {
+        alert("Message sent successfully!");
+    }, function (error) {
+        alert("Failed to send message. Please try again.");
+        console.error(error);
+    });
+
+    this.reset();
 });
