@@ -943,11 +943,16 @@ section {
 }
 
 .gold-achievement::before {
-    background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.15), transparent 70%);
+    background: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.2), transparent 70%);
 }
 
 .silver-achievement::before {
-    background: radial-gradient(circle at 50% 0%, rgba(192, 192, 192, 0.15), transparent 70%);
+    background: radial-gradient(circle at 50% 0%, rgba(192, 192, 192, 0.2), transparent 70%);
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .achievement-card:hover::before {
@@ -1144,6 +1149,13 @@ section {
     left: 12px;
     z-index: 1;
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    animation: dotPulse 2s infinite ease-in-out;
+}
+
+@keyframes dotPulse {
+    0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0); }
 }
 
 @media (min-width: 768px) {
@@ -1453,3 +1465,189 @@ textarea.form-control {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ==========================================================================
+   New Companies Section Styles
+   ========================================================================== */
+.companies {
+    background: var(--bg-gradient);
+}
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.company-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    cursor: default;
+}
+
+.company-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.company-role {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.company-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: var(--accent-color);
+    filter: blur(80px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.company-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.company-card:hover .company-glow {
+    opacity: 0.3;
+}
+
+.premium-card {
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.05);
+}
+
+.premium-card:hover {
+    border-color: #00f5ff;
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+}
+
+.premium-card .company-glow {
+    background: #00f5ff;
+}
+
+/* ==========================================================================
+   New Social Connect Section Styles
+   ========================================================================== */
+.social-connect {
+    background-color: var(--bg-color);
+    padding: 6rem 0;
+}
+
+.social-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.social-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-icon {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    transition: transform 0.3s ease;
+}
+
+.social-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.social-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.premium-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.github-card-premium:hover {
+    border-color: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.linkedin-card-premium:hover {
+    border-color: #0077b5;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 119, 181, 0.2);
+}
+
+.github-btn-view {
+    background: linear-gradient(135deg, #333 0%, #000 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.github-btn-view:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #444 0%, #111 100%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.linkedin-btn-view {
+    background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
+}
+
+.linkedin-btn-view:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 20px rgba(0, 119, 181, 0.3);
+}
+
+.social-card:hover .social-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Specific styling for LinkedIn */
+.social-card.linkedin-card-premium .social-icon {
+    color: #0077b5;
+}
+
+@media (max-width: 768px) {
+    .social-card {
+        padding: 2rem;
+    }
+}
